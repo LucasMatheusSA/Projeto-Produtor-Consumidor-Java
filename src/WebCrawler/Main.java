@@ -16,15 +16,16 @@ public class Main {
 
     
     public static void main(String[] args) throws IOException, InterruptedException {
-        WebCrawler w = new WebCrawler();
         Thread ThreadProdutor = (Thread) new Produtor();
         Thread ThreadConsumidor = (Thread) new Consumidor();
         
         //TESTE DE FUNÇÕES 
+        //WebCrawler w = new WebCrawler();
         //w.getImagesLinks("https://pixabay.com/pt/images/search/bob%20esponja/");
         //w.downloadLinks();
-        ThreadProdutor.start();
+        
         ThreadConsumidor.start();
+        ThreadProdutor.start();
         
         ThreadProdutor.join();
         ThreadConsumidor.join();

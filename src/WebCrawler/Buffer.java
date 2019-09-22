@@ -8,9 +8,9 @@ import ThreadsConsumidor.ConsumidorThread;
 public class Buffer {
 
     private static Buffer instance = null;
-    private static ArrayList<String> urlList;
+    private static ArrayList<String> urlList = new ArrayList<String>();
     
-    synchronized public static Boolean listIsEmpty(){
+    synchronized public static Boolean listIsEmpty(){ // Checar se o Buffer esta vazio 
     	if(urlList == null) {
     		return true;
     	}else {
@@ -21,7 +21,8 @@ public class Buffer {
     		}
         }
     }
-    synchronized public static Buffer getInstance(){
+    
+    synchronized public static Buffer getInstance(){ // Instanciar o Buffer 
         if(instance == null){
             instance = new Buffer();
             urlList = new ArrayList<String>();
@@ -29,31 +30,25 @@ public class Buffer {
         return instance;
     }
 
-    synchronized public static void setUrlList(ArrayList<String> urlList) {
+    synchronized public static void setUrlList(ArrayList<String> urlList) { // Colocar uma lista de Urls no Bufer
     	Buffer.urlList = urlList;
     }
 
-    synchronized public static void setURL(String url){
+    synchronized public static void setURL(String url){ // Colocar apenas uma Url no Buffer 
     	if(urlList == null) {
     		urlList = new ArrayList<String>();
     	}
     	urlList.add(url);
-//    	Thread downloader = new ConsumidorThread("Thread" );
-//        downloader.start();
-//        System.out.println("(Threads Consumidoras start(nova Thread))");
     }
 
-    synchronized public static String getURL(){
-        String aux = null;
-
+    synchronized public static String getURL(){ // Pegar apenas uma Url do Buffer
         if(urlList != null && urlList.size()>0){
-            aux = urlList.remove(0);
+            return urlList.remove(0);
         }
-
-        return aux;
+        return null;
     }
 
-    synchronized public static ArrayList<String> getURLs(){
+    synchronized public static ArrayList<String> getURLs(){ // Pegar todas as Urls do Buffer
     	if(urlList != null) {    	
     		return urlList;
     	}else {

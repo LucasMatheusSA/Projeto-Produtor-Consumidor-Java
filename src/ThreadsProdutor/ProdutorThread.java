@@ -22,11 +22,12 @@ import WebCrawler.WebCrawler;
 public class ProdutorThread extends Thread{
     
         String link = new String();
-        
+        String nome = new String();
         static int num = 0;
         
-        public ProdutorThread(String link){
+        public ProdutorThread(String link,String nome){
             this.link = link;
+            this.nome = nome;
         }
 	
         synchronized public void increment() {
@@ -34,22 +35,28 @@ public class ProdutorThread extends Thread{
         }
         
 	@Override
-	public void run() {
+	public void run() { // Vai ao link pega os links da imagens e quarda no Buffer 
             int i=0;
 	    try{
 	        Document doc = Jsoup.connect(link).get();
-	        ArrayList<String> Urls = new ArrayList<String>();
 	        Elements linksImg = doc.getElementsByTag("img");
+	        
 	        for(Element img : linksImg){
-	            Buffer.setURL("https:"+img.attr("src"));
+	            Buffer.setURL("https:" + img.attr("src"));
+	            System.out.println(nome + ":(imagem)-https:" + img.attr("src"));
 	        }
-            System.out.println("(URLs Threads)-"+Buffer.getURLs());
+	        
+            System.out.println("(Final da " + nome + ")-" + Buffer.getURLs());
+            
             } catch (IOException e) {
             }
+	    
         	Produtor.decrement();
+        	
         	if(Produtor.getStauts() == 0) {
         		Produtor.setStatusThread(false);
         	}
+        	
         	System.out.println(Produtor.getStatusThread());
         }
 	

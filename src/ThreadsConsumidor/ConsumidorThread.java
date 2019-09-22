@@ -20,22 +20,28 @@ public class ConsumidorThread extends Thread{
     
     
     @Override
-    public void run(){
+    public void run(){ // A Thread baixa as imagens do Buffer ate o Buffer estar vazio e não tiver nenhuma Thread Trabalhando
     	int i=0;
         while(!Buffer.listIsEmpty() || Produtor.statusProdutor()){
             try {
             	
                 String link = Buffer.getURL();
-                InputStream in = new URL(link).openStream();
                 
-                Files.copy(in,Paths.get("/home/lucas/Pictures/testeTrabalho/img" + i + name +".png"));
-                in.close();
-                System.out.println("img"+ i +" (baixada pela "+ name +")("+link+")");
-                i++;
+                if(link != null) {
+                	
+                	InputStream in = new URL(link).openStream();
+                
+                	Files.copy(in,Paths.get("/home/lucas/Pictures/testeTrabalho/img" + i + "-" + name +".png"));
+                	
+                	in.close();
+                	
+                	System.out.println("img"+ i +" (baixada pela "+ name +")("+link+")");
+                	i++;
+                }
             	
             } catch (Exception e) {
             }
         }
-        System.out.println("Final da " + name);
+        System.out.println("(Final da " + name + ")");
     }
 }

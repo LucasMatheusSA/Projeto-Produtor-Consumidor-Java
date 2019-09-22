@@ -14,9 +14,13 @@ public class Consumidor extends Thread{
 	
     @Override
     public void run(){
-    	Thread downloader = new ConsumidorThread("Thread-" + i);
-        downloader.start();
-        System.out.println("(Threads Consumidoras start)");
+    	System.out.println("(Threads Consumidoras start)");
+    	Thread downloader1 = new ConsumidorThread("ThreadConsumidor - " + i);
+        downloader1.start();i++;
+        Thread downloader2 = new ConsumidorThread("ThreadConsumidor - " + i);
+        downloader2.start();i++;
+        Thread downloader3 = new ConsumidorThread("ThreadConsumidor - " + i);
+        downloader3.start();
     }
     
 }
