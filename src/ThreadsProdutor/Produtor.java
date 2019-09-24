@@ -52,7 +52,7 @@ public class Produtor extends Thread{
 		this.status = status;
 	}
 
-	synchronized public static boolean getStatusThread() { // Dar uma olhada se é necessario 
+	synchronized public static boolean getStatusThread() { 
 		return statusThread;
 	}
 

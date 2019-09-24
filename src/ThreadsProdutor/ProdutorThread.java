@@ -57,7 +57,6 @@ public class ProdutorThread extends Thread{
         		Produtor.setStatusThread(false);
         	}
         	
-        	System.out.println(Produtor.getStatusThread());
         }
 	
 }

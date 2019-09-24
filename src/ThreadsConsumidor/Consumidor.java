@@ -20,7 +20,11 @@ public class Consumidor extends Thread{
         Thread downloader2 = new ConsumidorThread("ThreadConsumidor - " + i);
         downloader2.start();i++;
         Thread downloader3 = new ConsumidorThread("ThreadConsumidor - " + i);
-        downloader3.start();
+        downloader3.start();i++;
+        Thread downloader4 = new ConsumidorThread("ThreadConsumidor - " + i);
+        downloader4.start();i++;
+        Thread downloader5 = new ConsumidorThread("ThreadConsumidor - " + i);
+        downloader5.start();
     }
     
 }

@@ -8,6 +8,7 @@ import java.nio.file.Paths;
 
 import ThreadsProdutor.Produtor;
 import WebCrawler.Buffer;
+import WebCrawler.Semaforo;
 
 
 public class ConsumidorThread extends Thread{
@@ -22,7 +23,7 @@ public class ConsumidorThread extends Thread{
     @Override
     public void run(){ // A Thread baixa as imagens do Buffer ate o Buffer estar vazio e não tiver nenhuma Thread Trabalhando
     	int i=0;
-        while(!Buffer.listIsEmpty() || Produtor.statusProdutor()){
+        while(!Buffer.listIsEmpty() || Semaforo.getStatus() ){
             try {
             	
                 String link = Buffer.getURL();
